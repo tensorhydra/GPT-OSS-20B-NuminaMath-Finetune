@@ -1,4 +1,4 @@
-# 🧠 LoRA Fine-Tuning for MoE LLMs on H100
+# LoRA Fine-Tuning for MoE LLMs on H100
 
 > Memory-optimized LoRA fine-tuning for Mixture-of-Experts large language models — tested on a 20B MoE model (`gpt-oss-20b`) with the NuminaMath-TIR dataset on a single H100 GPU.
 
