@@ -1,4 +1,4 @@
-# LoRA Fine-Tuning for MoE LLMs on H100
+# LoRA Fine-Tuning for GPT-OSS-20B on Numinamath Dataset
 
 > Memory-optimized LoRA fine-tuning for Mixture-of-Experts large language models — tested on a 20B MoE model (`gpt-oss-20b`) with the NuminaMath-TIR dataset on a single H100 GPU.
 
@@ -90,15 +90,11 @@ config = Config(
 
 ---
 
-## Why MoE Models Need Special Handling
+## Training
 
-Standard LoRA fine-tuning scripts fail on MoE architectures because:
+The model was trained for exactly 2 epochs on the entire dataset without automated checkpoint selection. The final validation loss is 0.4039 for 2 full epochs.
 
-1. **CPU offloading** conflicts with expert dispatch — when experts are offloaded to CPU, the routing mechanism throws `KeyError` during forward passes
-2. **MLP/expert layer LoRA** can destabilize learned routing distributions
-3. **`device_map` with max_memory** can split expert groups across devices incorrectly
-
-This notebook addresses all three by disabling offloading, targeting only attention projections, and using `device_map="auto"` to let the model handle its own MoE layout.
+![Training Loss](loss_plot.png)
 
 ---
 
